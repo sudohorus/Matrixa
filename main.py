@@ -68,8 +68,8 @@ print(f"{'Sim/Yes' if is_square else 'Não/No'}\n")
 
 #preencher a matriz com uma lista de valores [1, 2, 3, 4, 5, 6]
 #fill the matrix with a list of values [1, 2, 3, 4, 5, 6]
-matrixList = Matrixa(2, 3)
-matrixList.from_list([1, 2, 3, 4, 5, 6])
+matrixList = Matrixa(3, 3)
+matrixList.from_list([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print(matrixList)
 
 print()
@@ -81,3 +81,10 @@ max_value, max_pos = matrixList.find_max()
 
 print(f"{min_value}, {min_pos}")
 print(f"{max_value}, {max_pos}")
+
+print()
+
+#add another matrix to the current matrix
+#adiciona uma outra matrix a sua matrix atual
+main_matrix = matrix.add_matrix(matrixList)
+print(main_matrix)

@@ -200,3 +200,22 @@ class Matrixa:
                     min_value = self.data[row][col]
                     min_pos = (row, col)
         return min_value, min_pos
+    
+    def add_matrix(self, other):
+        """
+        add another matrix to the current matrix, element-wise.
+        :param other: another matrix instance with the same dimensions.
+        :return: a new matrix with the result.
+
+        aadiciona outra matriz à matriz atual, elemento por elemento.
+        :param other: outra matrix com as mesmas dimensões.
+        :return: uma nova matrix com o resultado.
+        """
+
+        if self.rows != other.rows or self.cols != other.cols:
+            raise ValueError("matrices must have the same dimensions for addition.")
+        result = Matrixa(self.rows, self.cols)
+        for row in range(self.rows):
+            for col in range(self.cols):
+                result.data[row][col] = self.data[row][col] + other.data[row][col]
+        return result
