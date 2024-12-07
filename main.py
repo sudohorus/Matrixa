@@ -71,3 +71,13 @@ print(f"{'Sim/Yes' if is_square else 'Não/No'}\n")
 matrixList = Matrixa(2, 3)
 matrixList.from_list([1, 2, 3, 4, 5, 6])
 print(matrixList)
+
+print()
+
+#find the min value and the max value in a matrix
+#encontra o menor e o maior valor em uma matrix
+min_value, min_pos = matrixList.find_min()
+max_value, max_pos = matrixList.find_max()
+
+print(f"{min_value}, {min_pos}")
+print(f"{max_value}, {max_pos}")

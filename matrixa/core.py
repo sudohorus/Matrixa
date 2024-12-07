@@ -164,3 +164,39 @@ class Matrixa:
             for col in range(self.cols):
                 self.data[row][col] = input_list[idx]
                 idx += 1
+
+    def find_max(self):
+        """
+        find the maximum value in the matrix and its position.
+        :return: a tuple with the maximum value and its position (row, col).
+
+        encontra o valor máximo na matriz e sua posição.
+        :return: uma tupla com o valor máximo e sua posição (linha, coluna).
+        """
+
+        max_value = self.data[0][0]
+        max_pos = (0, 0)
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.data[row][col] > max_value:
+                    max_value = self.data[row][col]
+                    max_pos = (row, col)
+        return max_value, max_pos
+    
+    def find_min(self):
+        """
+        find the minimum value in the matrix and its position.
+        :return: a tuple with the minimum value and its position (row, col).
+
+        encontra o valor mínimo na matriz e sua posição.
+        :return: uma tupla com o valor mínimo e sua posição (linha, coluna).
+        """
+
+        min_value = self.data[0][0]
+        min_pos = (0, 0)
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.data[row][col] < min_value:
+                    min_value = self.data[row][col]
+                    min_pos = (row, col)
+        return min_value, min_pos
