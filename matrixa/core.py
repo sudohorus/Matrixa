@@ -1,21 +1,37 @@
+import random
+
 class Matrixa:
-    def __init__(self, rows: int, cols: int, fill: float = 0):
+    def __init__(self, rows: int, cols: int, fill: float = 0, randomize: bool = False, function: callable = None, min_val: int = 0, max_val: int = 100):
         """
         initialize the matrix with given dimensions and a default fill value.
         :param rows: number of rows in the matrix.
         :param cols: number of columns in the matrix.
         :param fill: default value to fill the matrix (default 0).
+        :param randomize: if true, fills the matrix with random values.
+        :param function: function to generate specific values for each matrix element.
+        :param min_val: minimum value for random integers (default 0).
+        :param max_val: maximum value for random integers (default 100).
         
         inicializa a matriz com dimensões dadas e um valor padrão para preenchimento.
         :param rows: numero de linhas na matriz.
         :param cols: numero de colunas na matriz.
         :param fill: valor padrao para preencher a matriz (padrao 0).
+        :param randomize: se verdadeiro, preenche com valores aleatorios.
+        :param function: funcao para gerar valores especificos para cada elemento da matriz.
+        :param min_val: valor minimo para gerar numeros inteiros (padrao 0).
+        :param max_val: valor maximo para gerar numeros inteiros (padrao 100).
+        
         """
         if rows <= 0 or cols <= 0:
             raise ValueError("matrix dimensions must be positive integers.")
         self.rows = rows
         self.cols = cols
-        self.data = [[fill for _ in range(cols)] for _ in range(rows)]
+        if randomize:
+            self.data = [[random.randint(min_val, max_val) for _ in range(cols)] for _ in range(rows)]
+        elif function:
+            self.data = [[function(row, col) for col in range(cols)] for row in range(rows)]
+        else:
+            self.data = [[fill for _ in range(cols)] for _ in range(rows)]
 
     def __repr__(self):
         #function to show a formatted matrix when printed
