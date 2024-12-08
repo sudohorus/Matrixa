@@ -1,90 +1,21 @@
 from matrixa.core import Matrixa
 
-#criar uma matriz 3x3 com valores padrão 0
-#create a 3x3 matrix with default value 0
-matrix = Matrixa(3, 3)
-print(matrix)
+mat1 = Matrixa(3, 3)
+mat2 = Matrixa(3, 3)
 
-print()
+mat1.data = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
 
-#configurar o valor na posição (1,1) para 5
-#set the value at position (1,1) to 5
-matrix.set(1, 1, 5)
-print(matrix)
+mat2.data = [
+    [9, 8, 7],
+    [6, 5, 4],
+    [3, 2, 1]
+]
 
-print()
-
-#obter o valor na posição (1,1)
-#get the value at position (1,1)
-value = matrix.get(1, 1)
-print(f"{value}\n")
-
-#preencher toda a matriz com o valor 7
-#fill the entire matrix with the value 7
-matrix.fill_with(7)
-print(matrix)
-
-print()
-
-#adicionar uma nova linha com valores [1, 2, 3]
-#add a new row with values [1, 2, 3]
-matrix.add_row([1, 2, 3])
-print(matrix)
-
-print()
-
-#adicionar uma nova coluna com valores [4, 5, 6, 7]
-#add a new column with values [4, 5, 6, 7]
-matrix.add_col([4, 5, 6, 7])
-print(matrix)
-
-print()
-
-#remover a terceira linha (índice 2)
-#remove the third row (index 2)
-matrix.remove_row(2)
-print(matrix)
-
-print()
-
-#remover a segunda coluna (índice 1)
-#remove the second column (index 1)
-matrix.remove_col(1)
-print(matrix)
-
-print()
-
-#transpor a matriz
-#transpose the matrix
-matrix.transpose()
-print(matrix)
-
-print()
-
-#verificar se a matriz é quadrada
-#check if the matrix is square
-is_square = matrix.is_square()
-print(f"{'Sim/Yes' if is_square else 'Não/No'}\n")
-
-#preencher a matriz com uma lista de valores [1, 2, 3, 4, 5, 6]
-#fill the matrix with a list of values [1, 2, 3, 4, 5, 6]
-matrixList = Matrixa(3, 3)
-matrixList.from_list([1, 2, 3, 4, 5, 6, 7, 8, 9])
-print(matrixList)
-
-print()
-
-#find the min value and the max value in a matrix
-#encontra o menor e o maior valor em uma matrix
-min_value, min_pos = matrixList.find_min()
-max_value, max_pos = matrixList.find_max()
-
-print(f"{min_value}, {min_pos}")
-print(f"{max_value}, {max_pos}")
-
-print()
-
-#add another matrix to the current matrix
-#adiciona uma outra matrix a sua matrix atual
-main_matrix = matrix.add_matrix(matrixList)
-print(main_matrix)
+print(mat1.subtract_matrix(mat2), "\n")
+print(mat1.multiply_matrix(mat2), "\n")
+print(mat1.scalar_multiply(2), "\n")
+print(mat1.determinant(), "\n")

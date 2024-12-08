@@ -207,7 +207,7 @@ class Matrixa:
         :param other: another matrix instance with the same dimensions.
         :return: a new matrix with the result.
 
-        aadiciona outra matriz à matriz atual, elemento por elemento.
+        adiciona outra matriz à matriz atual, elemento por elemento.
         :param other: outra matrix com as mesmas dimensões.
         :return: uma nova matrix com o resultado.
         """
@@ -219,3 +219,91 @@ class Matrixa:
             for col in range(self.cols):
                 result.data[row][col] = self.data[row][col] + other.data[row][col]
         return result
+    
+    def subtract_matrix(self, other):
+        """
+        subtract another matrix from the current matrix, element-wise.
+        :param other: another matrix instance with the same dimensions.
+        :return: a new matrix with the result.
+
+        subtrai outra matriz da matriz atual, elemento por elemento.
+        :param other: outra matriz com as mesmas dimensões.
+        :return: uma nova matriz com o resultado.
+        """
+        if self.rows != other.rows or self.cols != other.cols:
+            raise ValueError("matrices must have the same dimensions for subtraction")
+
+        result = Matrixa(self.rows, self.cols)
+        for row in range(self.rows):
+            for col in range(self.cols):
+                result.data[row][col] = self.data[row][col] - other.data[row][col]
+        return result
+    
+    def multiply_matrix(self, other):
+        """
+        multiply the current matrix by another matrix.
+        :param other: another matrix instance with compatible dimensions (columns of the first = rows of the second).
+        :return: a new matrix with the product.
+
+        multiplica a matriz atual por outra matriz.
+        :param other: outra matriz com dimensões compatíveis (colunas da primeira = linhas da segunda).
+        :return: uma nova matriz com o produto.
+        """
+        if self.cols != other.rows:
+            raise ValueError("number of columns of the first matrix must equal the number of rows of the second matrix.")
+        
+        result = Matrixa(self.rows, other.cols)
+        for i in range(self.rows):
+            for j in range(other.cols):
+                result.data[i][j] = sum(self.data[i][k] * other.data[k][j] for k in range(self.cols))
+        return result
+    
+    def scalar_multiply(self, scalar: float):
+        """
+        multiply the current matrix by a scalar value.
+        :param scalar: a numerical value to multiply each element of the matrix.
+        :return: a new matrix with the result.
+
+        multiplica a matriz atual por um valor escalar.
+        :param scalar: um valor numérico para multiplicar cada elemento da matriz.
+        :return: uma nova matriz com o resultado.
+        """
+        result = Matrixa(self.rows, self.cols)
+        for row in range(self.rows):
+            for col in range(self.cols):
+                result.data[row][col] = self.data[row][col] * scalar
+        return result
+    
+    def determinant(self):
+        """
+        calculate the determinant of the matrix (only for square matrices).
+        :return: the determinant value as a float.
+
+        calcula o determinante da matriz (somente para matrizes quadradas).
+        :return: o valor do determinante como um float.
+        """
+        if not self.is_square():
+            raise ValueError("determinant can only be calculated for square matrices.")
+
+        def _determinant_recursive(data):
+            """
+            helper function to calculate the determinant recursively.
+            :param data: a list of lists representing a square matrix.
+            :return: the determinant value.
+
+            função auxiliar para calcular o determinante recursivamente.
+            :param data: uma lista de listas representando uma matriz quadrada.
+            :return: o valor do determinante.
+            """
+            if len(data) == 1:
+                return data[0][0]
+            if len(data) == 2:
+                return data[0][0] * data[1][1] - data[0][1] * data[1][0]
+            
+            det = 0
+            for col in range(len(data)):
+                minor = [row[:col] + row[col+1:] for row in data[1:]]
+                det += ((-1) ** col) * data[0][col] * _determinant_recursive(minor)
+            return det
+
+        return _determinant_recursive(self.data)
